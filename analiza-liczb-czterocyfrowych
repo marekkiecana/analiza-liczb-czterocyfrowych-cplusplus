@@ -1,0 +1,50 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int liczba, liczba1, liczba2, wynik = -1, poprzedni_wynik = -2,licznik=0;
+    
+    do { //działa dalej tylko po wprowadzeniu prawidłowej liczby z podanego zakresu
+        cout << "Podaj czterocyfrową liczbę (zakres od 1000 do 9999): ";
+        cin >> liczba;
+    } while(liczba < 1000 || liczba > 9999);
+while(wynik != poprzedni_wynik) {
+    if (wynik!=-1) {liczba=wynik;}
+        int cyfry[4]; // tablica na cyfry
+        for(int i = 0; i < 4; i++) {
+            cyfry[i] = liczba % 10; // pobranie ostatniej cyfry
+            liczba /= 10; // usunięcie ostatniej cyfry
+        }
+
+        sort(cyfry, cyfry + 4, greater<int>()); // sortowanie tablicy z cyframi malejąco
+
+        // Konwersja posortowanych cyfr do liczby
+        liczba1 = 0;
+        for(int i = 0; i < 4; i++) {
+            liczba1 = liczba1 * 10 + cyfry[i];
+        }
+
+        sort(cyfry, cyfry + 4); // sortowanie tablicy z cyframi rosnąco
+
+        // Konwersja posortowanych cyfr do liczby
+        liczba2 = 0;
+        for(int i = 0; i < 4; i++) {
+            liczba2 = liczba2 * 10 + cyfry[i];
+        }
+
+        poprzedni_wynik = wynik;
+        wynik = liczba1 - liczba2; // obliczenie różnicy między liczbami
+
+        // Wyświetlenie wyniku
+        //cout << "Liczba 1 (malejąco): " << liczba1 << endl;
+        //cout << "Liczba 2 (rosnąco): " << liczba2 << endl;
+        //cout << "Wynik: " << wynik << endl;
+        licznik=licznik+1;
+        //cout << "Licznik: " << licznik-1 << endl;
+
+    }
+    cout << "Licznik: " << licznik-1 << endl;
+    return 0;
+}
